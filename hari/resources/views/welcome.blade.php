@@ -65,6 +65,12 @@
         </style>
     </head>
     <body>
+        @extends('layouts.master')
+
+        @section('content')
+            {{--  <p>저는 자식뷰의 'content' 섹션입니다.</p>  --}}
+        
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -79,7 +85,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <?= isset($greeting) ? "{ $greeting } " : 'Hello '; ?><?= $name; ?>
+                <!-- HTML 주석 안에서 {{$name}} 을 출력합니다. -->
+                {{-- 블레이드 주석 안에서 {{$name}} 을 출력합니다. --}}
+                    {{ $greeting or 'Hello ' }} {{ $name or '' }}
                 </div>
 
                 <div class="links">
@@ -89,7 +97,30 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                <h3>IF문</h3>
+                @if($itemCount = count($items))
+                    <p>{{$itemCount}} 종류의 과일이 있습니다.</p>
+                @endif
+                <h3>반복문</h3>
+                <ul>
+                    @foreach ($items as $item)
+                        <li> {{$item}} </li>
+                    @endforeach
+                </ul>
+                <h3>forelse는 if와 foreach의 결합</h3>
+                
+                {{--  아래 코드를 적어줌으로써 @empty가 작동함을 알 수 있다. 라우팅시 view인자로 넘겨받은 변수 덮어쓰기, 디버깅이나 빠른 실험을 할수있다.  --}}
+                <?php $items = []; ?> 
+                <ul>
+                    @forelse ($items as $item)
+                        <li> {{$item}} </li>
+                    @empty
+                        <p>암것도 없네</p>
+                    @endforelse
+                </ul>
             </div>
         </div>
+        @include('partials.footer')
+        @endsection
     </body>
 </html>

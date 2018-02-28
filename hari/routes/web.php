@@ -22,7 +22,12 @@ Route::get('/', function () {
 Route::get('/', function () {
     return view('welcome', [
         'name' => 'Foo',
-        'greeting' => '안녕하세요!'
+        'greeting' => '안녕하세요!',
+        'items' => [
+            'apple',
+            'banana',
+            'orange'
+        ]
     ]);
 });
 
@@ -47,3 +52,6 @@ Route::get('/', function () {
 // Route::get('/home', function() {
 //     return redirect(route('home'));
 // });
+Route::get('hello/sub',function(){
+    return view('hello/sub');
+});
