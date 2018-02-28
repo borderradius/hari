@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable. 데이터 추가가 가능한 컬럼 설정, 대량 할당이 가능하다.
      *
      * @var array
      */
@@ -19,7 +19,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for arrays. App\User::get() 조회쿼리에서 조회하지 않을 열 지정. 즉 조회할 때 값을 가져오지 않겠다는 것.
      *
      * @var array
      */
