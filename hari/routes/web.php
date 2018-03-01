@@ -101,3 +101,10 @@ Route::resource('articles', 'ArticlesController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * 디비 이벤트 리스너, 데이터베이스에 이벤트가 발생할 때 데이터베이스 쿼리를 감시할 수 있는 방법.
+ */
+// DB::listen(function($query) {
+//     dump($query->sql);
+// });

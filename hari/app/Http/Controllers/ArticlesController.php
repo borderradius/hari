@@ -13,7 +13,15 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        return __METHOD__ . '은 Article 컬렉션을 조회합니다.';
+        // return __METHOD__ . '은 Article 컬렉션을 조회합니다.';
+        // $articles = \App\Article::with('user')->get(); // N+1쿼리 해결방법은 with()메서드의 인자로 관계를 미리 로드. with('user')에서 user는 Article모델이 가진 관계표현 메서드
+        $articles = \App\Article::latest()->paginate(1);
+
+        // $articles = \App\Article::get();
+        // user() 관계가 필요없는 다른 로직 수행
+        // $articles->load('user');
+
+        return view('articles.index', compact('articles'));
     }
 
     /**
