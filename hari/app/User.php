@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    protected $date = ['last_login'];
 
     public function articles()
     {
