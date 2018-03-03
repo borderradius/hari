@@ -20,7 +20,7 @@ class ArticlesController extends Controller
         // $articles = \App\Article::get();
         // user() 관계가 필요없는 다른 로직 수행
         // $articles->load('user');
-
+        // dd(view('articles.index', compact('articles'))->render()); // render()는 뷰 인스턴스에 저장된 HTML코드를 출력해준다.
         return view('articles.index', compact('articles'));
     }
 
@@ -86,7 +86,13 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        return __METHOD__ . '은 다음 기본키를 가진 Article 모델을 조회합니다.' . $id;
+        $article = \App\Article::findOrFail($id);
+
+        dd($article);
+
+        return $article->toArray();
+
+        // return __METHOD__ . '은 다음 기본키를 가진 Article 모델을 조회합니다.' . $id;
     }
 
     /**
