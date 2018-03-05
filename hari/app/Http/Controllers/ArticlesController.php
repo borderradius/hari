@@ -73,6 +73,7 @@ class ArticlesController extends Controller
         // dump('이벤트를 던졌습니다.');
 
         event(new \App\Events\ArticlesEvent($article));
+        
 
         return redirect(route('articles.index'))->with('flash_message', '작성하신 글이 저장되었습니다.');
         
@@ -88,11 +89,9 @@ class ArticlesController extends Controller
     {
         $article = \App\Article::findOrFail($id);
 
-        dd($article);
+        debug($article->toArray());
 
-        return $article->toArray();
-
-        // return __METHOD__ . '은 다음 기본키를 가진 Article 모델을 조회합니다.' . $id;
+        return view('articles.show', compact('article'));
     }
 
     /**

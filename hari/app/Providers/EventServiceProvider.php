@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Auth\Events\Login::class => [
             \App\Listeners\UsersEventListener::class
         ],
+        \App\Events\ArticleCreated::class => [
+            \App\Listeners\ArticlesEventListener::class
+        ],
     ];
 
     /**
@@ -30,9 +33,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        \Event::listen(
-            \App\Events\ArticleCreated::class, 
-            \App\Listeners\ArticlesEventListener::class
-        );
+        // \Event::listen(
+        //     \App\Events\ArticleCreated::class, 
+        //     \App\Listeners\ArticlesEventListener::class
+        // );
     }
 }

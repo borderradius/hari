@@ -116,3 +116,56 @@ Route::get('/home', 'HomeController@index')->name('home');
 //     var_dump('이벤트를 받았습니다. 받은 데이터(상태)는 다음과 같습니다.');
 //     var_dump($article->toArray());
 // });
+
+
+/**
+ * 메일 메시지 만들기
+ */
+Route::get('mail', function() {
+    $article = App\Article::with('user')->find(1);
+
+    // ver. 1        
+    return Mail::send(
+        'emails.articles.created',
+        compact('article'),
+        function ($message) use ($article) {
+            $message->to('spacemonkey925@gmail.com');
+            // $message->to('nisino@naver.com');
+            $message->subject('새 글이 등록되었습니다 -' . $article->title);
+        }
+    );
+
+    // ver. 2
+    // return Mail::send(
+    //     'emails.articles.created',
+    //     compact('article'),
+    //     function ($message) use ($article) {
+    //         $message->from('nisino@naver.com','Goo');
+    //         $message->to(['spacemonkey925@gmail.com', 'qskyq@hanmail.net']);
+    //         $message->subject('새 글이 등록완료 -' . $article->title);
+    //         $message->cc('qskyq@hanmail.net');
+    //         $message->attach(storage_path('bag.jpg'));
+    //     }
+    // );
+
+});
+
+// 컴포넌트 가져오기 실습 I
+// Route::get('markdown', function() {
+//     $text =<<<EOT
+// # 마크다운 예제 1
+
+// 이 문서는 [마크다운][1]으로 썼습니다. 화면에는 HTML로 변환되어 출력됩니다.
+
+// ## 순서 없는 목록
+
+// - 첫 번째 항목
+// - 두 번째 항목[^1]
+
+// [1]: http://daringfireball.net/projects/markdown
+
+// [^1]: 두 번째 항목_ http://google.com
+// EOT;
+
+//     return app(ParsedownExtra::class)->text($text);
+// });
